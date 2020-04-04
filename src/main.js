@@ -1,11 +1,11 @@
-const TASK_COUNT = 3;
-
 import {createSiteMenuTemplate} from './components/menu.js';
 import {createFilterTemplate} from './components/filter.js';
 import {createBoardTemplate} from './components/board.js';
 import {createTaskTemplate} from './components/task.js';
 import {createTaskEditTemplate} from './components/task-editor.js';
 import {createLoadMoreButtonTemplate} from './components/load-button.js';
+
+const TASK_COUNT = 3;
 
 const render = (container, template) => {
   container.insertAdjacentHTML(`beforeend`, template);

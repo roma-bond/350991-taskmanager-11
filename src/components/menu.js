@@ -31,4 +31,4 @@ const createSiteMenuTemplate = () => {
   );
 };
 
-export {createSiteMenuTemplate};
+export {createSiteMenuTemplate as default};
