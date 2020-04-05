@@ -4,4 +4,4 @@ const createLoadMoreButtonTemplate = () => {
   );
 };
 
-export {createLoadMoreButtonTemplate as default};
+export default createLoadMoreButtonTemplate;

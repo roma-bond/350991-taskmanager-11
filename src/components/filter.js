@@ -62,4 +62,4 @@ const createFilterTemplate = () => {
   );
 };
 
-export {createFilterTemplate as default};
+export default createFilterTemplate;

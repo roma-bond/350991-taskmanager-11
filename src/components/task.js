@@ -46,4 +46,4 @@ const createTaskTemplate = () => {
   );
 };
 
-export {createTaskTemplate as default};
+export default createTaskTemplate;
