@@ -15,9 +15,8 @@ const render = (container, template) => {
   container.insertAdjacentHTML(`beforeend`, template);
 };
 
-const renderTasks = (firstElement, lastElement) => {
-  tasks.slice(firstElement, lastElement)
-    .forEach((task) => render(taskListElement, createTaskTemplate(task)));
+const renderTasks = (tasksArray) => {
+  tasksArray.forEach((task) => render(taskListElement, createTaskTemplate(task)));
 };
 
 const siteMainElement = document.querySelector(`.main`);
@@ -37,7 +36,7 @@ render(taskListElement, createTaskEditTemplate(tasks[0]));
 
 let showingTasksCount = SHOWING_TASKS_COUNT_ON_START;
 
-renderTasks(1, showingTasksCount);
+renderTasks(tasks.slice(1, showingTasksCount));
 
 render(boardElement, createLoadMoreButtonTemplate());
 
@@ -47,7 +46,7 @@ loadMoreButton.addEventListener(`click`, () => {
   const prevTasksCount = showingTasksCount;
   showingTasksCount = showingTasksCount + SHOWING_TASKS_COUNT_BY_BUTTON;
 
-  renderTasks(prevTasksCount, showingTasksCount);
+  renderTasks(tasks.slice(prevTasksCount, showingTasksCount));
 
   if (showingTasksCount >= tasks.length) {
     loadMoreButton.remove();

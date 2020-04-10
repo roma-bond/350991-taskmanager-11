@@ -1,4 +1,4 @@
-import {COLORS} from '../components/const.js';
+import {COLORS} from './const.js';
 
 const DescriptionItems = [
   `Изучить теорию`,
@@ -24,7 +24,8 @@ const getRandomArrayItem = (array) => {
 };
 
 const getRandomIntegerNumber = (min, max) => {
-  return min + Math.floor(Math.random() * (max - min));
+  const rand = min + Math.random() * (max + 1 - min);
+  return Math.floor(rand);
 };
 
 const getRandomDate = () => {

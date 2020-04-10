@@ -1,5 +1,5 @@
-import {MONTH_NAMES} from './const.js';
-import {formatTime} from './utils.js';
+import {MONTH_NAMES} from '../mock/const.js';
+import {formatTime} from '../utils/date-time.js';
 
 
 const createTaskTemplate = (task) => {
