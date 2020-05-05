@@ -12,7 +12,7 @@ const createColorsMarkup = (colors, currentColor) => {
       return (
         `<input
           type="radio"
-          id="color-${color}-${index}"
+          id="color-${color}--${index}"
           class="card__color-input card__color-input--${color} visually-hidden"
           name="color"
           value="${color}"
@@ -54,8 +54,7 @@ const createTaskEditTemplate = (task, options = {}) => {
   const {isDateShowing, isRepeatingTask, activeRepeatingDays} = options;
 
   const isExpired = dueDate instanceof Date && dueDate < Date.now();
-  const isBlockSaveButton = (isDateShowing && isRepeatingTask) ||
-    (isRepeatingTask && !isRepeating(activeRepeatingDays));
+  const isBlockSaveButton = isRepeatingTask && (isDateShowing || !isRepeating(activeRepeatingDays));
 
   const date = (isDateShowing && dueDate) ? `${dueDate.getDate()} ${MONTH_NAMES[dueDate.getMonth()]}` : ``;
   const time = (isDateShowing && dueDate) ? formatTime(dueDate) : ``;
@@ -161,10 +160,6 @@ class TaskEdit extends AbstractSmartComponent {
     this._subscribeOnEvents();
   }
 
-  rerender() {
-    super.rerender();
-  }
-
   reset() {
     const task = this._task;
 
@@ -187,15 +182,21 @@ class TaskEdit extends AbstractSmartComponent {
     element.querySelector(`.card__date-deadline-toggle`)
       .addEventListener(`click`, () => {
         this._isDateShowing = !this._isDateShowing;
-
         this.rerender();
       });
 
     element.querySelector(`.card__repeat-toggle`)
       .addEventListener(`click`, () => {
         this._isRepeatingTask = !this._isRepeatingTask;
-
         this.rerender();
+      });
+
+    element.querySelectorAll(`[name="color"]`)
+      .forEach((inputColor) => {
+        inputColor.addEventListener(`change`, (evt) => {
+          this._task.color = evt.target.value;
+          this.rerender();
+        });
       });
 
     const repeatDays = element.querySelector(`.card__repeat-days`);
